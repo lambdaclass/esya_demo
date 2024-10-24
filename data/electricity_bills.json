@@ -1,0 +1,64 @@
+{
+  "bills": [
+    {
+      "consumer_id": "364266",
+      "period": "2024-04",
+      "consumption_items": [
+        {
+          "source": "wind",
+          "state": "Karnataka",
+          "unit": "709 kWh",
+          "meter_id": "MTR0430"
+        },
+        {
+          "source": "wind",
+          "state": "Sikkim",
+          "unit": "809 kWh",
+          "meter_id": "MTR0257"
+        },
+        {
+          "source": "solar",
+          "state": "Kerala",
+          "unit": "137 kWh",
+          "meter_id": "MTR0724"
+        }
+      ]
+    },
+    {
+      "consumer_id": "451541",
+      "period": "2024-01",
+      "consumption_items": [
+        {
+          "source": "grid",
+          "state": "Kerala",
+          "unit": "216 kWh",
+          "meter_id": "MTR0614"
+        },
+        {
+          "source": "grid",
+          "state": "Punjab",
+          "unit": "686 kWh",
+          "meter_id": "MTR0159"
+        },
+        {
+          "source": "hydro",
+          "state": "Uttarakhand",
+          "unit": "633 kWh",
+          "meter_id": "MTR0989"
+        }
+      ]
+    },
+    {
+      "consumer_id": "141093",
+      "period": "2024-02",
+      "consumption_items": [
+        {
+          "source": "grid",
+          "state": "Maharashtra",
+          "unit": "273 kWh",
+          "meter_id": "MTR0045"
+        }
+      ]
+    }
+  ]
+}
