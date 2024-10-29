@@ -26,16 +26,9 @@ pub struct Bills {
     pub bills: Vec<Bill>,
 }
 
-// Define a trait for loading bills
-pub trait BillLoader {
-    fn load_from_file(file_path: &str) -> Result<Self, Box<dyn Error>>
-    where
-        Self: Sized;
-}
-
 // Implement the BillLoader trait for the Bills struct
-impl BillLoader for Bills {
-    fn load_from_file(file_path: &str) -> Result<Self, Box<dyn Error>> {
+impl Bills {
+    pub fn load_from_file(file_path: &str) -> Result<Self, Box<dyn Error>> {
         let file = File::open(file_path)?;
         let reader = BufReader::new(file);
         let bills = serde_json::from_reader(reader)?;

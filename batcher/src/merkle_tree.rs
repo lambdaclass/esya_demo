@@ -7,7 +7,7 @@ use std::{
     fs::{self, File},
     io::{self, Write},
 };
-use crate::bills::{Bills, Bill, BillLoader};
+use crate::bills::{Bills, Bill};
 
 #[derive(Clone, Default)]
 pub struct VerificationCommitmentBatch;
@@ -32,8 +32,8 @@ impl IsMerkleTreeBackend for VerificationCommitmentBatch {
     }
 }
 
-pub fn generate_merkle_tree(input_tree_path: &str, output_tree_path: &str) -> Result<MerkleTree::<VerificationCommitmentBatch>, io::Error> {
-    let values: Vec<Bill> = Bills::load_from_file(input_tree_path).unwrap().bills;
+pub fn generate_merkle_tree(bills: &Bills, output_tree_path: &str) -> Result<MerkleTree::<VerificationCommitmentBatch>, io::Error> {
+    let values= &bills.bills;
 
     let merkle_tree = MerkleTree::<VerificationCommitmentBatch>::build(&values)
         .ok_or_else(|| io::Error::new(io::ErrorKind::Other, "requested empty tree"))?;
