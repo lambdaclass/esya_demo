@@ -16,8 +16,12 @@ This project requires **Foundry** and **Cargo** to be installed. Follow these st
   curl -L https://foundry.paradigm.xyz | bash
   foundryup
   ```
+  
+## System Diagram
 
-- **Git**: Ensure Git is installed.
+The following diagram illustrates the overall architecture of the project:
+
+![System Diagram](docs/diagram.png)
 
 ### Initialization
 
@@ -34,11 +38,6 @@ This command performs the following:
 - Builds the **contracts** using Foundry.
 - Starts a local Ethereum node using **Anvil**.
 
-## System Diagram
-
-The following diagram illustrates the overall architecture of the project:
-
-![System Diagram](docs/diagram.png)
 
 ### Run the demo
 
