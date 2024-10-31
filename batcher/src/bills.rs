@@ -35,3 +35,12 @@ impl Bills {
         Ok(bills)
     }
 }
+
+impl Bill {
+    pub fn load_from_file(file_path: &str) -> Result<Self, Box<dyn Error>> {
+        let file = File::open(file_path)?;
+        let reader = BufReader::new(file);
+        let bill = serde_json::from_reader(reader)?;
+        Ok(bill)
+    }
+}

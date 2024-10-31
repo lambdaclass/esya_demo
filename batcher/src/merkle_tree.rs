@@ -20,7 +20,12 @@ impl IsMerkleTreeBackend for VerificationCommitmentBatch {
         let mut hasher = Keccak256::new();
         hasher.update(leaf.consumer_id.clone());
         hasher.update(leaf.period.clone());
-        // add the arrays element herehere
+        for item in &leaf.consumption_items {
+            hasher.update(item.source.clone());
+            hasher.update(item.state.clone());
+            hasher.update(item.unit.clone());
+            hasher.update(item.meter_id.clone());
+        }
         hasher.finalize().into()
     }
 
