@@ -1,6 +1,6 @@
 init:
 	mkdir output
-	git submoule update --init --recursive
+	git submodule update --init --recursive
 	cd batcher && cargo build
 	cd contracts && foundry build
 	anvil
