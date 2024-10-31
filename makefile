@@ -1,8 +1,8 @@
 init:
-	mkdir output
-	git submoule update --init --recursive
+	mkdir -p output
+	git submodule update --init --recursive
 	cd batcher && cargo build
-	cd contracts && foundry build
+	cd contracts && forge build
 	anvil
 
 deploy_contracts:
@@ -16,3 +16,4 @@ verify_bill:
 
 verify_bill_corrupted:
 	cd batcher && cargo run -- verify-proof --bill-path ../data/electricity_bill_2_corrupted.json --proof-path ../output/merkle_proof_2.json --index 2 --certificate-key GC-2024-4356
+
