@@ -1,0 +1,24 @@
+{
+  "consumer_id": "826609",
+  "period": "2024-11",
+  "consumption_items": [
+    {
+      "source": "hydro",
+      "state": "active",
+      "unit": "386 kWh",
+      "meter_id": "MTR0426"
+    },
+    {
+      "source": "solar",
+      "state": "inactive",
+      "unit": "982 kWh",
+      "meter_id": "MTR0111"
+    },
+    {
+      "source": "grid",
+      "state": "inactive",
+      "unit": "253 kWh",
+      "meter_id": "MTR0303"
+    }
+  ]
+}
