@@ -88,44 +88,58 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 async fn generate_proof(bills_path: &str, certificate_key: &str, contract: &Contract<SignerMiddleware<Provider<Http>, LocalWallet>>) -> Result<(), Box<dyn std::error::Error>> {
     let merkle_tree_output_path = "../output/merkle_tree.json";
     let merkle_proof_output_path = "../output/merkle_proof_[n].json";
-
+    println!("=== Esyasoft Bills Batcher  ===");
     // Load bills and generate Merkle tree
     let bills: Bills = Bills::load_from_file(bills_path)?;
     let merkle_tree = generate_merkle_tree(&bills, merkle_tree_output_path)?;
 
     // Generate proof for each bill
+    println!("Generating Merkle Tree ...");
     for (i, _bill) in bills.bills.iter().enumerate() {
         generate_merkle_proof(
             merkle_proof_output_path.replace("[n]", i.to_string().as_str()).as_str(), &merkle_tree, i)?;
     }
 
+    println!("Merkle Tree saved in {}", merkle_tree_output_path);
+    println!("--------------------------------");
+    println!("Merkle Root: {:?}", merkle_tree.root);
+    println!("--------------------------------");
+
     // Upload Merkle root to the contract
+    println!("Uploading Merkle Root to contract {} ...", contract.address());
     let merkle_root = merkle_tree.root;
     let method = contract.method::<_, H256>("setMerkleRoot", (certificate_key.to_string(), merkle_root))?;
     let tx = method.send().await?;
-
-    println!("Merkle root uploaded for key '{}'. Transaction Hash: {:?}", certificate_key, tx.tx_hash());
-
+    println!("Merkle root uploaded with key '{}'. Transaction Hash: {:?}", certificate_key, tx.tx_hash());
+    println!("================================");
     Ok(())
 }
 
 async fn verify_proof(proof_path: &str, bill_path: &str, index: usize, certificate_key: &str, contract: &Contract<SignerMiddleware<Provider<Http>, LocalWallet>>) -> Result<(), Box<dyn std::error::Error>> {
     // Load bill and verify proof
+    println!("=== Esyasoft Bill Verifier  ===");
+    println!("loading bill from {}", bill_path);
     let bill: Bill = Bill::load_from_file(bill_path)?;
+    println!("-------------------------------");
     println!("Bill: {}", serde_json::to_string_pretty(&bill)?);
-
+    println!("-------------------------------");
+    println!("Reading Merkle Root with key {} from contract {} ...", certificate_key,contract.address());
     // Get the Merkle root from the contract
     let merkle_root: [u8; 32] = contract
         .method::<_, [u8; 32]>("getMerkleRoot", certificate_key.to_string())?
         .call()
         .await?;
-
+    println!("--------------------------------");
+    println!("Merkle Root: {:?}", merkle_root);
+    println!("--------------------------------");
+    println!("Verifying proof for bill at position {} ...", index);
     let verification_result = verify_merkle_proof(
         &merkle_root, &bill, index, proof_path)
         .unwrap();
     
-    println!("Bill {} verified: {}", index, verification_result);
-    println!("Merkle Root for key '{}': {:?}", certificate_key, merkle_root);
-
+    println!("Bill verifcation result: {}", match verification_result{
+        true => "Success",
+        false => "Failed"
+    });
     Ok(())
 }
