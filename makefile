@@ -12,4 +12,4 @@ generate_proofs:
 	cd batcher && cargo run -- generate-proof --bills-path ../data/electricity_bills.json --certificate-key GC-2024-4356
 
 verify_bill:
-	cargo run -- verify-proof --bill-path ../data/electricity_bill_2_corrupted.json --proof-path ../output/merkle_proof_2.json --index 2 --certificate-key GC-2024-435
+	cd batcher cargo run -- verify-proof --bill-path ../data/electricity_bill_2_corrupted.json --proof-path ../output/merkle_proof_2.json --index 2 --certificate-key GC-2024-4356
