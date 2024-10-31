@@ -17,3 +17,5 @@ verify_bill:
 verify_bill_corrupted:
 	cd batcher && cargo run -- verify-proof --bill-path ../data/electricity_bill_2_corrupted.json --proof-path ../output/merkle_proof_2.json --index 2 --certificate-key GC-2024-4356
 
+verify_qr:
+	cd batcher && cargo run -- verify-qr --bill-path ../data/electricity_bill_2.json --qr-path ../output/qr_proof_2.png
