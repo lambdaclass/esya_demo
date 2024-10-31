@@ -1,5 +1,5 @@
 init:
-	mkdir output
+	mkdir -p output
 	git submodule update --init --recursive
 	cd batcher && cargo build
 	cd contracts && foundry build
