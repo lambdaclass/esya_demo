@@ -60,6 +60,14 @@ This command performs the following:
 
    This command verifies a specific bill's proof stored in `../output/merkle_proof_2.json`. It compares the Merkle root on-chain with the locally computed root for the bill specified by `index`.
 
+4. **Verify a Corrupted Bill**: Verifies a corrupted bill's proof, demonstrating how an invalid bill fails verification.
+
+   ```sh
+   make verify_bill_corrupted
+   ```
+
+   This command runs the verify-proof subcommand using a corrupted bill file, located at ../data/electricity_bill_2_corrupted.json, with proof data stored in ../output/merkle_proof_2.json. This example showcases failure handling by verifying a proof with mismatched data.
+
 ---
 
 ### Summary
