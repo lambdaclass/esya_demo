@@ -34,6 +34,12 @@ This command performs the following:
 - Builds the **contracts** using Foundry.
 - Starts a local Ethereum node using **Anvil**.
 
+## System Diagram
+
+The following diagram illustrates the overall architecture of the project:
+
+![System Diagram](docs/diagram.png)
+
 ### Run the demo
 
 1. **Deploy Contracts**: Deploys the `MerkleRootStorage` smart contract to the local Anvil network.
