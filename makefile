@@ -2,7 +2,7 @@ init:
 	mkdir -p output
 	git submodule update --init --recursive
 	cd batcher && cargo build
-	cd contracts && foundry build
+	cd contracts && forge build
 	anvil
 
 deploy_contracts:
